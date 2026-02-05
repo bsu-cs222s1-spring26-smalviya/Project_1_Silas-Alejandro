@@ -1,0 +1,39 @@
+{
+  "continue": {
+    "rvcontinue": "20260127194204|1335173969",
+    "continue": "||"
+  },
+  "query": {
+    "redirects": [
+      {
+        "from": "Zappa",
+        "to": "Frank Zappa"
+      }
+    ],
+    "pages": {
+      "10672": {
+        "pageid": 10672,
+        "ns": 0,
+        "title": "Frank Zappa",
+        "revisions": [
+          {
+            "user": "TheCharlevoix",
+            "timestamp": "2026-01-30T23:10:39Z"
+          },
+          {
+            "user": "TheCharlevoix",
+            "timestamp": "2026-01-30T23:10:06Z"
+          },
+          {
+            "user": "InternetArchiveBot",
+            "timestamp": "2026-01-30T06:42:30Z"
+          },
+          {
+            "user": "Tbf62",
+            "timestamp": "2026-01-27T19:43:08Z"
+          }
+        ]
+      }
+    }
+  }
+}

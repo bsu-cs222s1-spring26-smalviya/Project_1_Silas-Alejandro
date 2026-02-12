@@ -21,4 +21,5 @@ public class ConsoleIO {
 
         System.out.println(output);
     }
+
 }

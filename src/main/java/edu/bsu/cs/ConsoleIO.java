@@ -15,9 +15,7 @@ public class ConsoleIO {
     public static void printOutput(List<Redirect> redirects, List<Revision> revisions) {
         String output = "";
 
-        if (revisions != null) {
-            output += RedirectFormatter.formatAsString(redirects);
-        }
+        output += RedirectFormatter.formatAsString(redirects);
 
         output += RevisionFormatter.formatAsString(revisions);
 

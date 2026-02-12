@@ -19,7 +19,7 @@ public class RedirectFormatter {
         String string = "";
 
         for (Redirect redirect : redirects) {
-            string += "from: " + redirect.getFrom() + ", to: " + redirect.getTo() + "\n";
+            string += "Redirected to " + redirect.getTo() + "\n";
         }
 
         return string;

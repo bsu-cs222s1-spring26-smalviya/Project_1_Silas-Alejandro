@@ -1,6 +1,8 @@
 package edu.bsu.cs;
 
 import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.PathNotFoundException;
+import com.jayway.jsonpath.internal.Path;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -11,11 +13,11 @@ public class RedirectParser {
 
     public static List<Redirect> parse(Object json) {
 
-        List<Map<String, Object>> rawRedirects =
-                JsonPath.read(json, "$.query.redirects[*]");
-
-        if (rawRedirects.isEmpty()) {
-            return null;
+        List<Map<String, Object>> rawRedirects;
+        try {
+            rawRedirects = JsonPath.read(json, "$.query.redirects[*]");
+        } catch (PathNotFoundException e) {
+            rawRedirects = new ArrayList<>();
         }
 
         List<Redirect> redirects = new ArrayList<>();

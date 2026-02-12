@@ -1,8 +1,11 @@
 package edu.bsu.cs;
 
+import com.jayway.jsonpath.JsonPath;
+
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URLConnection;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
 
 public class WikipediaManager {
 
@@ -14,8 +17,26 @@ public class WikipediaManager {
         String input = ConsoleIO.getInput();
         if (input.isEmpty()) {
             System.err.println("No input provided...");
+            return;
         }
 
+        InputStream connection = null;
+        try {
+            connection = WikipediaConnection.connectToWikipedia(input, 15);
+        } catch (IOException e) {
+            System.err.println("Error connecting to network...");
+            return;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Object wikiJson = JsonPath.parse(connection).json();
+        List<Object> jsonMissingStatus =
+                JsonPath.read(wikiJson, "$.query.pages.*.missing");
+        if (!jsonMissingStatus.isEmpty()) {
+            System.err.println("Missing wikipedia article...");
+            return;
+        }
     }
 
 }

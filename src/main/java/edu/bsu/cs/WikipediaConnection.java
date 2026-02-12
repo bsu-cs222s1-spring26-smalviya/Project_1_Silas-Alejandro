@@ -9,7 +9,7 @@ import java.nio.charset.Charset;
 
 public class WikipediaConnection {
 
-    public URLConnection connectToWikipedia(String title, int limit)
+    public static URLConnection connectToWikipedia(String title, int limit)
             throws IOException, URISyntaxException {
 
         String encodedTitle = URLEncoder.encode(title, Charset.defaultCharset());

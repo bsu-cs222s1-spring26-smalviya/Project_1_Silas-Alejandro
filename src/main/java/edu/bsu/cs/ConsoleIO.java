@@ -6,7 +6,7 @@ public class ConsoleIO {
 
     public static String getInput() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter Query: ");
+        System.out.print("Enter Query: ");
         String response = input.nextLine();
         return response;
     }

@@ -1,5 +1,6 @@
 package edu.bsu.cs;
 
+import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,9 +17,11 @@ public class RedirectParserTest {
 
         try {
             FileInputStream inputFile = new FileInputStream(file);
-            List<Redirect> redirects = RedirectParser.parse(inputFile);
-            String string = RedirectFormatter.formatAsString(redirects);
-            Assertions.assertEquals("from: Zappa, to: Frank Zappa\n", string);
+            Object json = JsonPath.parse(inputFile).json();
+            List<Redirect> redirects = RedirectParser.parse(json);
+
+            Assertions.assertEquals("Zappa", redirects.get(0).getFrom());
+            Assertions.assertEquals("Frank Zappa", redirects.get(0).getTo());
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

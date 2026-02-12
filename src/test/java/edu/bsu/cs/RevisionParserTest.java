@@ -1,5 +1,6 @@
 package edu.bsu.cs;
 
+import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,13 +17,11 @@ public class RevisionParserTest {
 
         try {
             FileInputStream inputFile = new FileInputStream(file);
-            List<Revision> revisions = RevisionParser.parse(inputFile);
-            List<String> stringList = RevisionFormatter.format(revisions);
-            Assertions.assertEquals("[2026-01-30T23:10:39Z  TheCharlevoix" +
-                    ", 2026-01-30T23:10:06Z  TheCharlevoix" +
-                    ", 2026-01-30T06:42:30Z  InternetArchiveBot" +
-                    ", 2026-01-27T19:43:08Z  Tbf62]",
-                    stringList.toString());
+            Object json = JsonPath.parse(inputFile).json();
+            List<Revision> revisions = RevisionParser.parse(json);
+
+            Assertions.assertEquals("2026-01-30T23:10:39Z", revisions.get(0).getTimestamp());
+            Assertions.assertEquals("TheCharlevoix", revisions.get(0).getUsername());
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -1,6 +1,7 @@
 package edu.bsu.cs;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLConnection;
@@ -9,7 +10,7 @@ import java.nio.charset.Charset;
 
 public class WikipediaConnection {
 
-    public URLConnection connectToWikipedia(String title, int limit)
+    public static InputStream connectToWikipedia(String title, int limit)
             throws IOException, URISyntaxException {
 
         String encodedTitle = URLEncoder.encode(title, Charset.defaultCharset());
@@ -28,7 +29,6 @@ public class WikipediaConnection {
         URLConnection connection = uri.toURL().openConnection();
         connection.setRequestProperty("User-Agent",
                 "FirstProject/0.1 (academic use; https://example.com)");
-        connection.connect();
-        return connection;
+        return connection.getInputStream();
     }
 }

@@ -18,8 +18,10 @@ public class RevisionFormatter {
     public static String formatAsString(List<Revision> revisions) {
         String string = "";
 
+        int lineCount = 1;
         for (Revision revision : revisions) {
-            string += revision.getTimestamp() + "  " + revision.getUsername() + "\n";
+            string += lineCount + ")    " + revision.getTimestamp() + "  " + revision.getUsername() + "\n";
+            lineCount++;
         }
 
         return string;

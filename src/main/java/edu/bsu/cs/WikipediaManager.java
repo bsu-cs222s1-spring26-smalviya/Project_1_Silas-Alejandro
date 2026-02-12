@@ -30,13 +30,19 @@ public class WikipediaManager {
             e.printStackTrace();
         }
 
-        Object wikiJson = JsonPath.parse(connection).json();
+        Object json = JsonPath.parse(connection).json();
         List<Object> jsonMissingStatus =
-                JsonPath.read(wikiJson, "$.query.pages.*.missing");
+                JsonPath.read(json, "$.query.pages.*.missing");
         if (!jsonMissingStatus.isEmpty()) {
             System.err.println("Missing wikipedia article...");
             return;
         }
+
+        List<Redirect> redirects = RedirectParser.parse(json);
+        List<Revision> revisions = RevisionParser.parse(json);
+
+        ConsoleIO.printOutput(redirects, revisions);
+
     }
 
 }

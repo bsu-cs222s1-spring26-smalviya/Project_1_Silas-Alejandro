@@ -9,11 +9,14 @@ import java.util.Map;
 
 public class RedirectParser {
 
-    public static List<Redirect> parse(InputStream inputStream) {
-        Object json = JsonPath.parse(inputStream).json();
+    public static List<Redirect> parse(Object json) {
 
         List<Map<String, Object>> rawRedirects =
                 JsonPath.read(json, "$.query.redirects[*]");
+
+        if (rawRedirects.isEmpty()) {
+            return null;
+        }
 
         List<Redirect> redirects = new ArrayList<>();
 

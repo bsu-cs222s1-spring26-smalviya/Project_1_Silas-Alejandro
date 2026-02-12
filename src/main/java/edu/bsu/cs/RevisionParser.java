@@ -9,12 +9,10 @@ import java.util.Map;
 
 public class RevisionParser {
 
-    public static List<Revision> parse(InputStream inputStream) {
-        Object json = JsonPath.parse(inputStream).json();
+    public static List<Revision> parse(Object json) {
 
         List<Map<String, Object>> rawRevisions =
                 JsonPath.read(json, "$.query.pages.*.revisions[*]");
-
         List<Revision> revisions = new ArrayList<>();
 
         for (Map<String, Object> revision : rawRevisions) {

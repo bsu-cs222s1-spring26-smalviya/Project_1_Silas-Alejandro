@@ -16,10 +16,5 @@ public class WikipediaConnectionTest {
         assertNotNull(connection);
     }
 
-    @Test
-    void sanityCheck() {
-        throw new RuntimeException("If you see this, tests are being discovered");
-    }
-
 
 }

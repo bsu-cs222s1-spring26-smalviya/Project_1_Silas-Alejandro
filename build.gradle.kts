@@ -13,7 +13,8 @@ dependencies {
     implementation("com.jayway.jsonpath:json-path:2.9.0")
 
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.10.1")
 }
 
 tasks.test {

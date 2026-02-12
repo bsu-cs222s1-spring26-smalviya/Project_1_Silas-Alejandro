@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class RevisionParser {
 
-    public List<Revision> parse(InputStream inputStream) {
+    public static List<Revision> parse(InputStream inputStream) {
         Object json = JsonPath.parse(inputStream).json();
 
         List<Map<String, Object>> rawRevisions =

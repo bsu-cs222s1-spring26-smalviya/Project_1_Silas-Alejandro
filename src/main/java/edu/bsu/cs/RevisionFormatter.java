@@ -5,7 +5,7 @@ import java.util.List;
 
 public class RevisionFormatter {
 
-    public List<String> format(List<Revision> revisions) {
+    public static List<String> format(List<Revision> revisions) {
         List<String> lines = new ArrayList<>();
 
         for (Revision revision : revisions) {

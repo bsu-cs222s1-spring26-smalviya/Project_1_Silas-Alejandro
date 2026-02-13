@@ -20,7 +20,7 @@ public class RevisionFormatter {
 
         int lineCount = 1;
         for (Revision revision : revisions) {
-            string += lineCount + ")    " + revision.getTimestamp() + "  " + revision.getUsername() + "\n";
+            string += lineCount + ")  " + revision.getTimestamp() + "  " + revision.getUsername() + "\n";
             lineCount++;
         }
 

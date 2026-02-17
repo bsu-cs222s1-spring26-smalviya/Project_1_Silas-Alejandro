@@ -24,12 +24,6 @@ tasks.test {
     useJUnitPlatform()
 }
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(25)) // <- match your installed JDK
-    }
-}
-
 javafx {
     // Use a stable release that matches your JDK (e.g., 21.x with JDK 21)
     version = "21.0.5"

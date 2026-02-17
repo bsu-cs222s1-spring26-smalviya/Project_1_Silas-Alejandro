@@ -1,5 +1,7 @@
 plugins {
     id("java")
+    id("application")
+    id("org.openjfx.javafxplugin") version "0.1.0"
 }
 
 group = "org.example"
@@ -20,4 +22,22 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(25)) // <- match your installed JDK
+    }
+}
+
+javafx {
+    // Use a stable release that matches your JDK (e.g., 21.x with JDK 21)
+    version = "21.0.5"
+    modules("javafx.controls", "javafx.fxml")
+}
+
+application {
+    // If you have module-info.java, also set mainModule below.
+    mainClass.set("edu.bsu.cs.UI")
+    // mainModule.set("edu.bsu.cs") // <- uncomment if you have a module-info.java named 'module edu.bsu.cs { ... }'
 }

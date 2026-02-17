@@ -11,4 +11,15 @@ public class ConsoleIO {
         String response = input.nextLine();
         return response;
     }
+
+    public static void printOutput(List<Redirect> redirects, List<Revision> revisions) {
+        String output = "";
+
+        output += RedirectFormatter.formatAsString(redirects);
+
+        output += RevisionFormatter.formatAsString(revisions);
+
+        System.out.println(output);
+    }
+
 }

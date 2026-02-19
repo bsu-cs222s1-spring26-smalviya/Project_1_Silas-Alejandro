@@ -19,21 +19,11 @@ public class WikipediaManager {
             return;
         }
 
-        InputStream connection = null;
+        Object json;
         try {
-            connection = WikipediaConnection.connectToWikipedia(input, 15);
-        } catch (IOException e) {
-            System.err.println("Error connecting to network...");
-            return;
+            json = getWikipediaRevisionsJson(input);
         } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Object json = JsonPath.parse(connection).json();
-        List<Object> jsonMissingStatus =
-                JsonPath.read(json, "$.query.pages.*.missing");
-        if (!jsonMissingStatus.isEmpty()) {
-            System.err.println("Missing wikipedia article...");
+            System.err.println(e.getMessage());
             return;
         }
 
@@ -44,16 +34,12 @@ public class WikipediaManager {
 
     }
 
-    public static String searchForRevisions(String query) {
-        if (query.isEmpty()) {
-            return "No input provided...";
-        }
-
+    public static Object getWikipediaRevisionsJson(String query) throws Exception {
         InputStream connection = null;
         try {
             connection = WikipediaConnection.connectToWikipedia(query, 15);
         } catch (IOException e) {
-            return "Error connecting to network...";
+            throw new Exception("Error connecting to network...");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,18 +48,10 @@ public class WikipediaManager {
         List<Object> jsonMissingStatus =
                 JsonPath.read(json, "$.query.pages.*.missing");
         if (!jsonMissingStatus.isEmpty()) {
-            return "Missing wikipedia article...";
+            throw new Exception("Missing wikipedia article...");
         }
 
-        List<Redirect> redirects = RedirectParser.parse(json);
-        List<Revision> revisions = RevisionParser.parse(json);
-
-        String output = "";
-
-        output += RedirectFormatter.formatAsString(redirects);
-        output += RevisionFormatter.formatAsString(revisions);
-
-        return output;
+        return json;
     }
 
 }

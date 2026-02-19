@@ -12,6 +12,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.lang.foreign.SegmentAllocator;
+import java.util.List;
 
 public class UI extends Application {
 
@@ -68,8 +69,26 @@ public class UI extends Application {
 
     private void searchForRevisions() {
         String input = inputField.getText();
+        if (input.isEmpty()) {
+            outputPanel.setText("No input provided...");
+            return;
+        }
 
-        String output = WikipediaManager.searchForRevisions(input);
+        Object json = null;
+        try {
+            json = WikipediaManager.getWikipediaRevisionsJson(input);
+        } catch (Exception e) {
+            outputPanel.setText(e.getMessage());
+            return;
+        }
+
+        List<Redirect> redirects = RedirectParser.parse(json);
+        List<Revision> revisions = RevisionParser.parse(json);
+
+        String output = "";
+
+        output += RedirectFormatter.formatAsString(redirects);
+        output += RevisionFormatter.formatAsString(revisions);
 
         outputPanel.setText(output);
     }

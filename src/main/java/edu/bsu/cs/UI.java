@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import java.lang.foreign.SegmentAllocator;
 import java.util.List;
 
 public class UI extends Application {
@@ -74,7 +73,7 @@ public class UI extends Application {
             return;
         }
 
-        Object json = null;
+        Object json;
         try {
             json = WikipediaManager.getWikipediaRevisionsJson(input);
         } catch (Exception e) {
